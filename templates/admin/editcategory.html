@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title class="bg-info">Edit Category</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="w-50 m-auto p-4 bg-light">
+<h1 class="text-center bg-info"> Edit Category </h1>
+    <form method="post" action = {% url 'editcategory' category.pk %} enctype="multipart/form-data">
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Update Category</a>
+
+        </button>
+        {% csrf_token %}
+    </form>
+
+</div>
+</body>
+</html>

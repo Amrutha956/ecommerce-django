@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="main-sidebar sidebar-style-2">
+    <aside id="sidebar-wrapper">
+      <div class="sidebar-brand">
+       <a href="/" ><img src="{% static 'images/logo.png' %}" width="100px" ></a>
+      </div>
+      <div class="sidebar-brand sidebar-brand-sm">
+        <a href="/" ><img src="{% static 'images/logo.png' %}" width="100px" ></a>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="menu-header">Dashboard</li>
+        <li class="dropdown active">
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+          <ul class="dropdown-menu">
+            <li class=active><a class="nav-link" href="{% url 'userlist' %}">Accounts</a></li>
+            <li><a class="nav-link" href="{% url 'categorylist' %}">Categories</a></li>
+            <li><a class="nav-link" href="{% url 'productlist' %}">Products</a></li>
+          </ul>
+        </li>
+        <li class="menu-header">Starter</li>
+       
+
+      <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+        <a href="{% url 'logout' %}" class="btn btn-primary btn-lg btn-block btn-icon-split">
+          <i class="fas fa-rocket"></i> LOGOUT
+        </a>
+      </div>        </aside>
+  </div>
