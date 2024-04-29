@@ -13,12 +13,16 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def cadmin(request):
-   return render(request,'admin/home.html')
+   if request.user.is_admin:
+        return render(request,'admin/home.html')
+   else:
+       return redirect('home')
 
 
 #list users
 
 def user_list(request):
+
     records=Account.objects.filter(is_admin = False)
     mydict={'records':records}
     return render(request,'admin/userlist.html',context=mydict)
@@ -142,7 +146,7 @@ def editproduct(request,pk):
             form.save()
             return redirect('productlist')
     else:
-        form = CategoryForm(instance=product)
+        form = ProductForm(instance=product)
     return render(request, 'admin/editproduct.html', {'form': form,'product':product})
 
 def deleteproduct(request,pk=None):

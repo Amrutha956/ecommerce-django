@@ -18,7 +18,7 @@ path('',views.cadmin,name='cadmin'),
     path('cadmin/category/add/', views.addcategory,name='addcategory'),
     path('cadmin/category/edit/<pk>', views.editcategory,name='editcategory'),
     path('cadmin/category/delete/<pk>', views.deletecategory,name='deletecategory'),
-    path('cadmin/category/view/<eid>', views.viewcategory,name='viewcategory'),
+   
    
 
    #list products
@@ -27,9 +27,5 @@ path('',views.cadmin,name='cadmin'),
     path('cadmin/products/edit/<pk>', views.editproduct,name='editproduct'),
     path('cadmin/products/delete/<pk>', views.deleteproduct,name='deleteproduct'),
     
-
-
-
-
 
 ]

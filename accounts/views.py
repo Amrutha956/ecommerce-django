@@ -6,7 +6,9 @@ from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.decorators.cache import never_cache
-
+from orders.models import Order
+from cart.views import _cart_id
+from cart.models import Cart,CartItem
 
 
 
@@ -58,6 +60,22 @@ def login(request):
              messages.error(request,'User is blocked !')
              return redirect('login')
         elif user is not None:
+                try:
+                    
+                    cart = Cart.objects.get(cart_id = _cart_id(request))
+                    is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                    
+                    if is_cart_item_exists:
+                        cart_item = CartItem.objects.filter(cart=cart)
+                        
+                         
+                        for item in cart_item:
+                              item.user = user
+                              item.save()
+                              
+                except:
+                    
+                    pass
             
                 auth.login(request,user)
                 request.session['user_id'] = user.id 
@@ -103,3 +121,15 @@ def otp(request):
         # If the request method is not POST, render the OTP verification page
         return render(request, 'accounts/otp.html')
 
+@login_required(login_url='login')
+def dashboard(request):
+     orders = Order.objects.order_by('-created_at').filter(user_id = request.user.id,is_ordered = True)
+     orders_count = orders.count()
+     context ={
+          'orders_count' : orders_count,
+             }
+     
+     return render(request,'accounts/dashboard.html',context)
+
+def myorders(request):
+     return render(request,'accounts/myorders.html')
